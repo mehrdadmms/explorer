@@ -417,3 +417,38 @@ export function formatUSD(
   const formatted = formatNumber(value, options);
   return `$${formatted}`;
 }
+
+/**
+ * Format basis points (bps) as a percentage string.
+ * 1 bp = 0.01%, so 10,000 bps = 100%.
+ *
+ * @remarks
+ * Useful for protocol parameters expressed in basis points
+ * (commission rates, slashing rates, etc.).
+ *
+ * @param value - The basis-point value (number or numeric string)
+ * @param options - Optional formatting configuration (forwarded to formatPercent)
+ * @returns Formatted percentage string (e.g., "2.5%", "100%")
+ *
+ * @example
+ * formatBasisPoints(0)      // "0%"
+ * formatBasisPoints(100)    // "1%"
+ * formatBasisPoints(250)    // "2.5%"
+ * formatBasisPoints(10000)  // "100%"
+ */
+export function formatBasisPoints(
+  value: number | string | null | undefined,
+  options: FormatOptions = {}
+): string {
+  if (value == null) {
+    return "0%";
+  }
+
+  const num = Number(value);
+
+  if (isNaN(num)) {
+    return "0%";
+  }
+
+  return formatPercent(num / 10000, options);
+}

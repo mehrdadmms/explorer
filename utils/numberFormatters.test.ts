@@ -1,4 +1,5 @@
 import {
+  formatBasisPoints,
   formatETH,
   formatLPT,
   formatNumber,
@@ -421,5 +422,28 @@ describe("formatUSD", () => {
 
   it("supports forceSign", () => {
     expect(formatUSD(10, { forceSign: true })).toBe("$+10");
+  });
+});
+
+describe("formatBasisPoints", () => {
+  it("formats zero as '0%'", () => {
+    expect(formatBasisPoints(0)).toBe("0%");
+  });
+
+  it("converts basis points to percent", () => {
+    expect(formatBasisPoints(100)).toBe("1%");
+    expect(formatBasisPoints(250)).toBe("2.5%");
+    expect(formatBasisPoints(10000)).toBe("100%");
+  });
+
+  it("accepts numeric strings", () => {
+    expect(formatBasisPoints("500")).toBe("5%");
+  });
+
+  it("returns '0%' for null, undefined, or NaN", () => {
+    expect(formatBasisPoints(null)).toBe("0%");
+    expect(formatBasisPoints(undefined)).toBe("0%");
+    expect(formatBasisPoints(NaN)).toBe("0%");
+    expect(formatBasisPoints("not-a-number")).toBe("0%");
   });
 });
