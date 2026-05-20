@@ -7,7 +7,7 @@ early_access: false
 reviews:
   profile: assertive
   request_changes_workflow: false
-  high_level_summary: false
+  high_level_summary: true
   poem: false
   review_status: false
   collapse_walkthrough: true
@@ -62,21 +62,7 @@ reviews:
         - Nitpick formatting that linters/formatters already handle
 
         OUTPUT FORMAT:
-        Start every review body with a one-line TL;DR on its own line,
-        BEFORE the actionable-comments header. Use exactly this format:
-
-          - If no issues:    "**TL;DR:** ✅ LGTM — safe to merge."
-          - If issues found: "**TL;DR:** ⚠️ <N> issue(s) — <≤15-word summary
-            naming the most important one>."
-
-        Example TL;DRs:
-          - "**TL;DR:** ⚠️ 1 issue — `msPerDay` constant missing `* 24`, so `daysBetween` returns hours."
-          - "**TL;DR:** ⚠️ 2 issues — duplicated status mapping across 4 functions; missing tests."
-
-        Keep the TL;DR to ONE line. Do not repeat it in the body.
-
-        After the TL;DR (and the standard "Actionable comments posted: N"
-        header), list ONLY important issues. For each issue:
+        If changes are needed, list ONLY important issues. For each issue:
           - **Problem:** what is wrong
           - **Why it matters:** the concrete impact
           - **Suggested fix:** how to address it
